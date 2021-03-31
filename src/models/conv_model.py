@@ -19,6 +19,7 @@ class ConvolutionalModel(Model):
         }
         hypers.update(super().get_default_hyperparameters())
         hypers.update(model_hypers)
+        hypers['patience'] = 50
         return hypers
 
     def __init__(self,

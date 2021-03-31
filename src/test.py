@@ -40,6 +40,8 @@ def run(arguments):
     test.compute_evaluation_metrics(RichPath.create(arguments['MODEL_PATH'], azure_info_path=azure_info_path),
                                     arguments, azure_info_path, valid_data_dirs, test_data_dirs)
 
+
 if __name__ == '__main__':
     args = docopt(__doc__)
+    args.MODEL_PATH = '/home/yang/Github/CodeSearchNet/resources/saved_models/neuralbowmodel-2021-02-27-19-50-48_model_best.pkl.gz'
     run_and_debug(lambda: run(args), args['--debug'])

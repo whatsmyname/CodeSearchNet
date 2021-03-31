@@ -10,12 +10,14 @@ class ConvolutionSeqEncoder(MaskedSeqEncoder):
     @classmethod
     def get_default_hyperparameters(cls) -> Dict[str, Any]:
         encoder_hypers = {'1dcnn_position_encoding': 'learned',  # One of {'none', 'learned'}
-                          '1dcnn_layer_list': [128, 128, 128],
-                          '1dcnn_kernel_width': [16, 16, 16],  # Has to have same length as 1dcnn_layer_list
+                          # '1dcnn_layer_list': [128, 128, 128],
+                          # '1dcnn_kernel_width': [16, 16, 16],  # Has to have same length as 1dcnn_layer_list
+                          '1dcnn_layer_list': [],
+                          '1dcnn_kernel_width': [],  # Has to have same length as 1dcnn_layer_list
                           '1dcnn_add_residual_connections': True,
                           '1dcnn_activation': 'tanh',
                           '1dcnn_pool_mode': 'weighted_mean',
-                         }
+                          }
         hypers = super().get_default_hyperparameters()
         hypers.update(encoder_hypers)
         return hypers
@@ -25,9 +27,10 @@ class ConvolutionSeqEncoder(MaskedSeqEncoder):
 
     @property
     def output_representation_size(self):
-        return self.get_hyper('1dcnn_layer_list')[-1]
+        # return self.get_hyper('1dcnn_layer_list')[-1]
+        return 128
 
-    def make_model(self, is_train: bool=False) -> tf.Tensor:
+    def make_model(self, is_train: bool = False) -> tf.Tensor:
         with tf.variable_scope("1dcnn_encoder"):
             self._make_placeholders()
 

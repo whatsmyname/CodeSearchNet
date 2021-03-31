@@ -109,7 +109,7 @@ class SeqEncoder(Encoder):
             token_vocabulary = BpeVocabulary(vocab_size=hyperparameters['%s_token_vocab_size' % encoder_label],
                                              pct_bpe=hyperparameters['%s_pct_bpe' % encoder_label]
                                              )
-            token_vocabulary.fit(merged_token_counter)
+            token_vocabulary.fit(merged_token_counter,encoder_label)
         else:
             token_vocabulary = Vocabulary.create_vocabulary(tokens=merged_token_counter,
                                                             max_size=hyperparameters['%s_token_vocab_size' % encoder_label],
